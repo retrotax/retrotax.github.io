@@ -1,0 +1,7 @@
+archives/*
+.git
+.openshift
+README-INTERNAL.md
+data/*
+node_modules/*
+.htaccess

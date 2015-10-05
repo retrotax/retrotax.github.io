@@ -1,0 +1,1189 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to RetroTax Plugin (Demo & Configuration)</title>
+    <!-- Twitter Bootstrap
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    -->
+    <!-- Material Design for Bootstrap -->
+    <link href="widget/iframe/css/bootstrap.css" rel="stylesheet">
+    <link href="demo/css/material.min.css" rel="stylesheet">
+    <link href="demo/css/roboto.min.css" rel="stylesheet">
+    <link href="demo/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="demo/css/colorpicker.css" rel="stylesheet">
+    <!--<link href="widget/iframe/css/styles.css" rel="stylesheet">-->
+    <link href="demo/css/material-fullpalette.min.css" rel="stylesheet">
+    <link href="demo/css/ripples.min.css" rel="stylesheet">
+    <link href="demo/bower_components/json-formatter/dist/json-formatter.min.css" rel="stylesheet">
+
+                <style>
+                  #input h2 {
+                    padding: 14px;
+                    font-size: 16px;
+                    font-weight: 400;
+                  }
+                  #input .inputs {
+                    width: 80%;
+                  }
+                  #input .form-control-wrapper {
+                    margin: 30px 0;
+                  }
+                  .form-control-wrapper{
+                    padding-top:15px;
+                    padding-bottom:15px;
+                    margin-top:15px;
+                    margin-bottom:15px;
+                  }
+                           .clear-30{
+         clear: both;
+         height:30px;
+         }
+                </style>
+
+    <script src="widget/iframe/js/min/jquery-1.11.1.min.js"></script>
+    <script src="widget/iframe/js/min/angular.min.js"></script>
+    <script src="widget/iframe/js/angular-route.js"></script>
+    <script src="widget/iframe/js/min/ui-bootstrap-custom-tpls-0.12.0.js"></script>
+
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+-->
+    <script src="demo/js/material.min.js"></script>
+    <script src="demo/js/jquery-ui.min.js"></script>
+    <script src="demo/js/ripples.min.js"></script>
+    <script src="demo/bower_components/json-formatter/dist/json-formatter.min.js"></script>
+    <script src="widget/iframe/js/jscolor.js"></script>
+    <script>
+        $.material.init();
+        var hname='/dist/widget/iframe';
+        var _retrotax_options={
+            iframe_base_path: hname,
+            plugin_type: 'prequal',
+            username:'demoapi.hiring.manager',
+            apikey:'B47400F36FB8BA0C247798C94D153703',
+            clientid:364,
+            companyid:1054,
+            locationid:8557,
+            framework:'material-design',
+            delay: 0,
+            debug: true,
+            logo:'',
+            callback_url:'',
+            whitelist_code:'',
+            button_class:'btn btn-primary',
+            button_text:'Open Tax Credit Screening Form',
+            button_class_error:'btn btn-danger',
+            button_text_error:'Oh snap, an error!',
+            prepopulate_by:'id',
+            prequal: {
+                email_to:'',
+                email_cc:'paul.commons@retrotax-aci.com',
+                partner_name:'John Doe',
+                partner_organization:'Partner Organization',
+                partner_website:'https://some-partner-website.com',
+                alliance:'',
+                closing_text:'Thank you for partnering with Hiring Co',
+                intro_text:'',
+                logo_url:'http://plugin.retrotax-aci.com/prequal/img/PCG_logo.png',
+                logo_width:'300',
+                logo_height:'75',
+                retrotax_contact:'paul.commons@retrotax-aci.com',
+                ask_ssn:false
+            },
+            populated_fields: {
+                firstname:'first_name',
+                lastname:'last_name',
+                middleinitial:'middle_init',
+                city:'city',
+                state:'state',
+                zip:'zipcode',
+                address:'address',
+                address2:'address2',
+                dob:'dateOfBirth'
+            },
+            head_color: 'FFFFFF',
+            panel_color: 'FFFFFF',
+            text_color: '000000',
+            error_color: 'c0392b',
+            inputWidth: '50',
+        };
+    </script>
+
+    <script src="demo/js/app.js"></script>
+    <script src="widget/retrotax_plugin.js"></script>
+    <script src="widget/iframe/js/modal-preview.js"></script>
+
+<script type='text/javascript'>
+(function (d, t) {
+  var bh = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    bh.type = 'text/javascript';
+  bh.src = '//www.bugherd.com/sidebarv2.js?apikey=gp7db8gucoehvycr1sus6q';
+  s.parentNode.insertBefore(bh, s);
+  })(document, 'script');
+</script>
+
+</head>
+
+<base href="/">
+<body ng-app="retrotax">
+<div ng-controller="ctlDemo" class="container" ng-init="initDemo()">
+ <div class="row">
+ <div class="col-sm-6 well page active pageClose">
+    <h3>Plugin Configuration</h3>
+    <hr>
+    <form name="demoForm" id="demoForm">
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input disabled="" name="iframe_base_path" class="form-control" type="text" ng-model="_retrotax_options.iframe_base_path" value="{{_retrotax_options.iframe_base_path}}">
+                    <div class="floating-label">iframe_base_path</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="Your webscreen.retrotax-aci.com client-side api-key, which can be found within TCID under 'Accounts'." name="plugin_type" ng-model="_retrotax_options.plugin_type" value="{{_retrotax_options.plugin_type}}" required>
+                    <div class="floating-label">plugin_type</div>
+                    <div class="hint">ATS, DEMO, OBS, PREQUAL</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" name="username" type="text" data-hint="TCID username" ng-model="_retrotax_options.username" value="{{_retrotax_options.username}}" required>
+                    <div class="floating-label">username</div>
+                    <div class="hint">TCID username</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="TCID Client-side api-key" ng-model="_retrotax_options.apikey" value="{{_retrotax_options.apikey}}" name="apikey" required>
+                    <div class="floating-label">apikey</div>
+                    <div class="hint">TCID Client-side api-key</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="number" name="companyid" data-hint="TCID Client ID" ng-model="_retrotax_options.clientid" value="{{_retrotax_options.clientid}}">
+                    <div class="floating-label">clientid</div>
+                    <div class="hint">TCID Client ID</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="number" name="companyid" data-hint="TCID Company ID" ng-model="_retrotax_options.companyid" value="{{_retrotax_options.companyid}}">
+                    <div class="floating-label">companyid</div>
+                    <div class="hint">TCID Company ID</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="number" name="locationid" data-hint="TCID Location ID" value="{{_retrotax_options.locationid}}">
+                    <div class="floating-label">locationid</div>
+                    <div class="hint">TCID Location ID</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="number" name="delay" data-hint="How long to delay the modal" ng-model="_retrotax_options.delay" value="{{_retrotax_options.delay}}">
+                    <div class="floating-label">delay</div>
+                    <div class="hint">How long to delay the modal in milliseconds. Integer.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" name="debug" data-hint="If set to true, we will log to the console" ng-model="_retrotax_options.debug" value="{{_retrotax_options.debug}}">
+                    <div class="floating-label">debug</div>
+                    <div class="hint">If set to true, we will log to the console. Boolean.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" name="button_text" data-hint="What the text displayed to the end-user should say"
+                    ng-model="_retrotax_options.button_text" value="{{_retrotax_options.button_text}}">
+                    <div class="floating-label">button_text</div>
+                    <div class="hint">What the text displayed to the end-user should say.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" name="button_class" data-hint="Optionally apply a css class to the retrotax element" ng-model="_retrotax_options.button_class" value="{{_retrotax_options.button_class}}">
+                    <div class="floating-label">button_class</div>
+                    <div class="hint">This depends on your CSS - Demo is using Bootstrap so only those classes will be applied.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" name="button_text_error" data-hint="Optionally apply error text to the element's innerHTML in case of an error"
+                    ng-model="_retrotax_options.button_text_error" value="{{_retrotax_options.button_text_error}}">
+                    <div class="floating-label">button_text_error</div>
+                    <div class="hint">Optionally apply error text to the element's innerHTML in case of an error</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" name="button_class_error" data-hint="Optionally apply a css class to the retrotax element in case of an error." ng-model="_retrotax_options.button_class_error" value="{{_retrotax_options.button_class_error}}">
+                    <div class="floating-label">button_class_error</div>
+                    <div class="hint">This depends on your CSS - Demo is using Bootstrap so only those classes will be applied.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="url" name="logo" data-hint="Provide a valid URL to replace the default RetroTax Logo"
+                    ng-model="_retrotax_options.logo" value="{{_retrotax_options.logo}}">
+                    <div class="floating-label">logo</div>
+                    <div class="hint">Provide a valid URL to replace the default RetroTax Logo</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="url" name="callback_url" data-hint="Provide a callback URL and we will return a JSON response of each ATS or OBS submission"
+                    ng-model="_retrotax_options.callback_url" value="{{_retrotax_options.callback_url}}">
+                    <div class="floating-label">callback_url</div>
+                    <div class="hint">Provide a callback URL and we will return a JSON response of each ATS or OBS submission</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" name="authorization_code" data-hint="For white-listing a hostname" ng-model="_retrotax_options.whitelist_code" value="{{_retrotax_options.whitelist_code}}">
+                    <div class="floating-label">Authorization Code</div>
+                    <div class="hint">For white-listing a hostname</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" name="framework" data-hint="bootstrap or material-design" ng-model="_retrotax_options.framework" value="{{_retrotax_options.framework}}">
+                    <div class="floating-label">framework</div>
+                    <div class="hint">bootstrap or material-design</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" name="hide_fields" data-hint="Whether to hide prepopulated fields from the user or display their populated values. Boolean." ng-model="_retrotax_options.hide_fields" value="{{_retrotax_options.hide_fields}}">
+                    <div class="floating-label">hide_fields</div>
+                    <div class="hint">Whether to hide prepopulated fields from the user or display their populated values. Boolean.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" name="prepopulate_by" data-hint="If set to id or name the plugin will auto-populate the values in those fields to match those to our field names." ng-model="_retrotax_options.prepopulate_by" value="{{_retrotax_options.prepopulate_by}}">
+                    <div class="floating-label">prepopulate_by</div>
+                    <div class="hint">If set to id or name the plugin will auto-populate the values in those fields to match those to our field names.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <hr>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="" name="populated_fields_firstname" ng-model="_retrotax_options.populated_fields.firstname" value="{{_retrotax_options.populated_fields.firstname}}">
+                    <div class="floating-label">populated_fields.firstname</div>
+                    <div class="hint">String.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="" name="populated_fields_lastname" ng-model="_retrotax_options.populated_fields.lastname" value="{{_retrotax_options.populated_fields.lastname}}">
+                    <div class="floating-label">populated_fields.lastname</div>
+                    <div class="hint">String.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="" name="populated_fields_middleinitial" ng-model="_retrotax_options.populated_fields.middleinitial" value="{{_retrotax_options.populated_fields.middleinitial}}">
+                    <div class="floating-label">populated_fields.middleinitial</div>
+                    <div class="hint">Single Character String.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="" name="populated_fields_address" ng-model="_retrotax_options.populated_fields.address" value="{{_retrotax_options.populated_fields.address}}">
+                    <div class="floating-label">populated_fields.address</div>
+                    <div class="hint">String.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="" name="populated_fields_address2" ng-model="_retrotax_options.populated_fields.address2" value="{{_retrotax_options.populated_fields.address2}}">
+                    <div class="floating-label">populated_fields.address2</div>
+                    <div class="hint">String.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="" name="populated_fields_city" ng-model="_retrotax_options.populated_fields.city" value="{{_retrotax_options.populated_fields.city}}">
+                    <div class="floating-label">populated_fields.city</div>
+                    <div class="hint">String</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" name="populated_fields_state" data-hint="" ng-model="_retrotax_options.populated_fields.state" value="{{_retrotax_options.populated_fields.state}}">
+                    <div class="floating-label">populated_fields.state</div>
+                    <div class="hint">Integer or 2 Chacter State Abbreviated String.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" name="populated_fields_dob" type="text" data-hint="Date of Birth" ng-model="_retrotax_options.populated_fields.dob" value="{{_retrotax_options.populated_fields.dob}}">
+                    <div class="floating-label">populated_fields.dob</div>
+                    <div class="hint">Date of Birth.  String (mm/dd/yyyy)</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+
+
+
+            <hr>
+<div ng-show="_retrotax_options.plugin_type=='prequal'">
+<!--
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="Email Address to Send To" name="prequal_email_to" id="prequal_email_to" ng-model="_retrotax_options.prequal.email_to" value="{{_retrotax_options.prequal.email_to}}" data-displayname="Email Address To Send To">
+                    <div class="floating-label">prequal.email_to</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+-->
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="Email Address to CC" name="prequal_email_cc" id="prequal_email_cc" ng-model="_retrotax_options.prequal.email_cc" value="{{_retrotax_options.prequal.email_cc}}" data-displayname="Email Address To CC">
+                    <div class="floating-label">prequal.email_cc</div>
+                    <div class="hint">Comma delimited email addresses to CC on the prequalification email.  Email or Comma delimited emails.</div>
+                 <!--   <div class="hint invalid" ng-if="demoFrom.prequal_email_cc.$error.email">Email Address is invalid</div> -->
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <!--
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="Email Address to BCC" name="prequal_email_bcc" id="prequal_email_bcc" ng-model="_retrotax_options.prequal.email_bcc" value="{{_retrotax_options.prequal.email_bcc}}" data-displayname="Email Address To BCC">
+                    <div class="floating-label">prequal.email_bcc</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        -->
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="" name="prequal.partner_name" ng-model="_retrotax_options.prequal.partner_name" value="{{_retrotax_options.prequal.partner_name}}">
+                    <div class="floating-label">prequal.partner_name</div>
+                    <div class="hint">The individual contact person at your organization who will sign the prequalification PDF. String.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="" name="prequal.partner_organization" ng-model="_retrotax_options.prequal.partner_organization" value="{{_retrotax_options.prequal.partner_organization}}">
+                    <div class="floating-label">prequal.partner_organization</div>
+                    <div class="hint">The name of your organization which will appear on the prequalification PDF. String.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="url" data-hint="" name="prequal.partner_website" ng-model="_retrotax_options.prequal.partner_website" value="{{_retrotax_options.prequal.partner_website}}">
+                    <div class="floating-label">prequal.partner_website</div>
+                    <div class="hint">Partner website (e.g. http://yourwebsite.com). URL.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="" name="prequal.intro_text" ng-model="_retrotax_options.prequal.intro_text" value="{{_retrotax_options.prequal.intro_text}}">
+                    <div class="floating-label">prequal.intro_text</div>
+                    <div class="hint">Introduction text inserted at the beginning of the prequalification PDF. String.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="url" data-hint="" name="prequal.logo_url" ng-model="_retrotax_options.prequal.logo_url" value="{{_retrotax_options.prequal.logo_url}}">
+                    <div class="floating-label">prequal.logo_url</div>
+                    <div class="hint">Web accessible URL which will be inserted at the top of the prequalification PDF. URL.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" maxlength="3" minlength="0" data-hint="" name="prequal.logo_width" ng-model="_retrotax_options.prequal.logo_width" value="{{_retrotax_options.prequal.logo_width}}">
+                    <div class="floating-label f1">prequal.logo_width</div>
+                    <div class="hint">Max width 300px. Integer.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" maxlength="3" minlength="0" data-hint="" name="prequal.logo_height" ng-model="_retrotax_options.prequal.logo_height" value="{{_retrotax_options.prequal.logo_height}}">
+                    <div class="floating-label f2">prequal.logo_height</div>
+                    <div class="hint">Max height 75px. Integer.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="" name="prequal.closing_text" ng-model="_retrotax_options.prequal.closing_text" value="{{_retrotax_options.prequal.closing_text}}">
+                    <div class="floating-label">prequal.closing_text</div>
+                    <div class="hint">Closing text inserted at the end of the prequalification PDF. String.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="" name="prequal.retrotax_contact" ng-model="_retrotax_options.prequal.retrotax_contact" value="{{_retrotax_options.prequal.retrotax_contact}}">
+                    <div class="floating-label">prequal.retrotax_contact</div>
+                    <div class="hint">The RetroTax Contact Email Address. Email.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" data-hint="" name="prequal.ask_ssn" ng-model="_retrotax_options.prequal.ask_ssn" value="{{_retrotax_options.prequal.ask_ssn}}">
+                    <div class="floating-label">prequal.ask_ssn</div>
+                    <div class="hint">Whether or not to ask user for Social Security Number (necessary for generarting documents, like Form 180).  Boolean.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+</div>
+</form>
+<div class="clear-30"></div>
+         <div class="col-sm-12">
+
+    <h5>The plugin configuration as a JSON Object:</h5>
+
+    <json-formatter json="_retrotax_options" open="0"></json-formatter>
+</div>
+</div> <!-- col 6 well -->
+
+ <div class="col-sm-6">
+    <h3>Your Website, App, or HRIS System</h3>
+<hr>
+
+<h5>An example of an existing form.  The configuration form on the left will automatically update the ID and Name attributes in the fields below.  Complete the configuration form with the ID or Name attributes in your website or application and insert fake values in the fields below. This will give you an exact picture of what the RetroTax Plugin will look like in your site.</h5>
+<div class="clear-30"></div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input id="{{_retrotax_options.populated_fields.firstname}}" name="{{_retrotax_options.populated_fields.firstname}}" class="form-control" type="text" data-hint="Insert any first name and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.">
+                    <div class="floating-label">Your Form ID or Name Attribute: {{_retrotax_options.populated_fields.firstname}}</div>
+                    <div class="hint">Insert any first name and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input id="{{_retrotax_options.populated_fields.lastname}}" name="{{_retrotax_options.populated_fields.lastname}}" class="form-control" type="text" data-hint="Insert any last name and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.">
+                    <div class="floating-label">Your Form ID or Name Attribute: {{_retrotax_options.populated_fields.lastname}}</div>
+                    <div class="hint">Insert any last name and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+         <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input id="{{_retrotax_options.populated_fields.middleinitial}}" name="{{_retrotax_options.populated_fields.middleinitial}}" class="form-control" type="text" data-hint="Insert any last name and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.">
+                    <div class="floating-label">Your Form ID or Name Attribute: {{_retrotax_options.populated_fields.middleinitial}}</div>
+                    <div class="hint">Insert any middle initial and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input id="{{_retrotax_options.populated_fields.address}}" name="{{_retrotax_options.populated_fields.address}}" class="form-control" type="text" data-hint="Insert any last name and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.">
+                    <div class="floating-label">Your Form ID or Name Attribute: {{_retrotax_options.populated_fields.address}}</div>
+                    <div class="hint">Insert any address and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input id="{{_retrotax_options.populated_fields.address2}}" name="{{_retrotax_options.populated_fields.address2}}" class="form-control" type="text" data-hint="Insert any last name and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.">
+                    <div class="floating-label">Your Form ID or Name Attribute: {{_retrotax_options.populated_fields.address2}}</div>
+                    <div class="hint">Insert any address2 and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input id="{{_retrotax_options.populated_fields.city}}" name="{{_retrotax_options.populated_fields.city}}" class="form-control" type="text" data-hint="Insert any last name and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.">
+                    <div class="floating-label">Your Form ID or Name Attribute: {{_retrotax_options.populated_fields.city}}</div>
+                    <div class="hint">Insert any city and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input id="{{_retrotax_options.populated_fields.state}}" name="{{_retrotax_options.populated_fields.state}}" class="form-control" type="text" data-hint="Insert any last name and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.">
+                    <div class="floating-label">Your Form ID or Name Attribute: {{_retrotax_options.populated_fields.state}}</div>
+                    <div class="hint">Insert any state and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-control-wrapper">
+                    <input id="{{_retrotax_options.populated_fields.dob}}" name="{{_retrotax_options.populated_fields.dob}}" class="form-control" type="text" data-hint="Insert any last name and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.">
+                    <div class="floating-label">Your Form ID or Name Attribute: {{_retrotax_options.populated_fields.dob}}</div>
+                    <div class="hint">Insert any Date of Birth and the value will be transferred to the RetroTax Plugin and the user will not be required to answer this question.</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="clear-30"></div>
+
+<hr>
+    <!-- Add this to your site -->
+    <div id="retrotax_plugin"></div>
+    <!-- Disregard this little guy - for demo purposes only, si vous plait -->
+    <h3>Button Displayed On Your Site:</h3>
+<div class="clear-30"></div>
+
+    <center>
+    <button ng-disabled="demoForm.$invalid" id="retrotax_plugin_trigger" class="{{_retrotax_options.button_class}}">{{_retrotax_options.button_text}}</button>
+    </center>
+    <center>
+    <p ng-if="demoForm.$invalid"><i>The configuration form is invalid. Please correct any invalid fields in order to open the plugin</i></p>
+    </center>
+
+ </div>
+
+
+
+
+<div class="col-sm-12 panel-color">
+<div class="col-sm-6 text-center well page active">
+<h3>View Customizer</h3>
+        <div class="col-md-6 col-sm-12 text-left">
+            <p><span class="customText">Head color:</span><br> <input id="head_color" class="inp color {pickerFaceColor:'lightgrey',pickerFace:3,pickerBorder:0,pickerInsetColor:'grey',pickerPosition:'top',pickerBorderRadius:4}" onchange="document.getElementsByClassName('head-color')[0].style.backgroundColor = '#'+this.color; document.getElementsByClassName('head-color')[1].style.backgroundColor = '#'+this.color"></p>
+        </div>
+        <div class="col-md-6 col-sm-12 text-left">
+            <p><span class="customText">Panel color:</span><br> <input id="panel_color" class="inp color {pickerFaceColor:'lightgrey',pickerFace:3,pickerBorder:0,pickerInsetColor:'grey',pickerPosition:'top',pickerBorderRadius:4}" onchange="document.getElementsByClassName('mod')[0].style.backgroundColor = '#'+this.color; document.getElementsByClassName('mod')[1].style.backgroundColor = '#'+this.color"></p>
+        </div>
+        <div class="col-md-6 col-sm-12 text-left">
+            <p><span class="customText">Text color:</span><br> <input id="text_color" class="inp color {pickerFaceColor:'lightgrey',pickerFace:3,pickerBorder:0,pickerInsetColor:'grey',pickerPosition:'top',pickerBorderRadius:4}" onchange="$('#modal-preview').find('.floating-label2').each(function() {this.style.color = '#' + color});$('#modal-preview-bootstrap').find('.floating-label2').each(function() {this.style.color = '#' + color}); $('#emailAdressMaterial').css('color', '#' + data.text_color);"></p>
+        </div>
+        <div class="col-md-6 col-sm-12 text-left">
+            <p><span class="customText">Error color:</span><br> <input id="error_color" class="inp color {pickerFaceColor:'lightgrey',pickerFace:3,pickerBorder:0,pickerInsetColor:'grey',pickerPosition:'top',pickerBorderRadius:4}" onchange="$('#modal-preview').find('.floatingError').each(function() {$('.floatingError').focus(function(){$(this).css({'color': '#' + color}) }) });"></p>
+        </div>
+        <!-- <div class="col-md-6 col-sm-12">
+            <p>Error color: <input id="error_color" class="inp color {pickerFaceColor:'lightgrey',pickerFace:3,pickerBorder:0,pickerInsetColor:'grey',pickerPosition:'top',pickerBorderRadius:4}" onchange="$('#firstname').focus(function(){$('#modal-preview').find('.floating-label2').each(function() {this.style.color = '#' + color})});"></p>
+        </div> -->
+        <div class="col-md-12 col-sm-12 themeChose sizePicker text-center">
+            <p><span class="customText ">Chose Preview theme:</span><br>
+                <select name="Chose theme" class="inp" id="theme">
+                    <option class="option" value="material">Material design</option>
+                    <option class="option" value="bootstrap">Bootstrap</option>
+                </select>
+            </p>
+        </div>
+        <div class="col-md-12 col-sm-12 sizePicker text-center">
+            <p><span class="customText">Size:</span> <br><input type="number" id="inputWidth" class="inp" max="50" maxlength="2" placeholder="%"></p>
+            <div id="mysliderWidth"></div>
+        </div>
+        <div ng-disabled="demoForm.$invalid" id="retrotax_preview" class="col-sm-12 text-center">
+            <button type="button" class="preview text-center btn btn-primary but-mod">Preview</button>
+        </div>
+</div>
+</div>
+
+
+
+</div>
+
+</div>
+
+
+<!-- modal-preview -->
+<div class="wrap-modal">
+
+ <div id="modal-preview" class="mod mod1 mod-text">
+
+        <center class="head-color header-modal">
+            <img ng-click="setDefaults();" class="img img-thumbnail img-responsive logo ng-scope logo-modal" ng-src="/widget/iframe/images/retrotax_plugin_logo.png" src="/widget/iframe/images/retrotax_plugin_logo.png">
+            <span class="text-right span-close">Close</span>
+        </center>
+
+        <div class="panel panel-mod colHeight1">
+            <div class="panel-heading modal-head">
+                <h4 class="panel-title">
+                  <a href="#" class="textColor accordion-toggle mod1 floating-label2" ng-click="toggleOpen()" accordion-transclude="heading"><span class="ng-binding ng-scope">
+                        Basic Info:   </span><i ng-class="{'pull-right mdi-alert-warning':icon.BasicInfo}" class="ng-scope"></i>
+                        </a>
+                </h4>
+            </div>
+        </div>
+
+
+        <div class="panel-collapse1 mod1">
+            <div class="panel-body">
+
+                <div class="row ng-scope">
+                 <div class="col-sm-6 colHeight" ng-hide="args.populated_fields.firstname!=''  &amp;&amp; args.hide_fields">
+                        <div class="form-control-wrapper mod1">
+                        <input ng-class="{'form-control empty':args.populated_fields.firstname=='', 'form-control':true}" type="text" data-hint="Enter First Name" ng-model="tcid.employee.maindata.firstname" name="firstname" id="firstname" ng-required="true" data-displayname="First Name" ng-minlength="1" ng-maxlength="50" class="ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength form-control empty textColor floating-label2" required="required">
+                            <div class="textColor floating-label floating-label2 floatingError">First Name</div>
+                            <div class="hint invalid ng-scope floating-label2" ng-if="frmEmployee.firstname.$error.required">First Name is required</div>
+                            <span class="material-input"></span>
+                        </div>
+                </div>
+
+                 <div class="col-sm-6 colHeight" ng-hide="args.populated_fields.lastname != ''  &amp;&amp; args.hide_fields">
+                        <div class="form-control-wrapper">
+                        <input ng-class="{'form-control empty':args.populated_fields.lastname=='', 'form-control':true}" type="text" data-hint="Enter Last Name" ng-model="tcid.employee.maindata.lastname" name="lastname" id="lastname" ng-required="true" data-displayname="Last Name" ng-minlength="2" ng-maxlength="50" class="ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength form-control empty textColor floating-label2" required="required">
+                            <div class="floating-label floating-label2">Last Name</div>
+                            <div class="hint invalid ng-scope floating-label2" ng-if="frmEmployee.lastname.$error.required">Last Name is required</div>
+                            <span class="material-input"></span>
+                        </div>
+                </div>
+
+                 <div class="col-sm-6 colHeight" ng-hide="args.populated_fields.address!='' &amp;&amp; args.hide_fields">
+                        <div class="form-control-wrapper">
+                        <input ng-class="{'form-control empty':args.populated_fields.address=='',  'form-control':true}" type="text" data-hint="Enter Your Home Address" ng-model="tcid.employee.maindata.address" name="address" ng-required="true" ng-minlength="5" ng-maxlength="100" data-displayname="Address" class="ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength form-control empty textColor floating-label2" required="required">
+                        <div class="floating-label textColor floating-label2">Address</div>
+                            <!-- ngIf: frmEmployee.address.$error.required --><div class="hint invalid ng-scope floating-label2" ng-if="frmEmployee.address.$error.required">Address is required</div><!-- end ngIf: frmEmployee.address.$error.required -->
+                            <!-- ngIf: frmEmployee.address.$error.minlength || frmEmployee.address.$error.maxlength -->
+                            <span class="material-input"></span>
+                        </div>
+                </div>
+
+                 <div class="col-sm-6 colHeight" ng-hide="args.populated_fields.address!='' &amp;&amp; args.hide_fields">
+                        <div class="form-control-wrapper textColor">
+                        <input  name="address2" ng-required="true" ng-minlength="5" ng-maxlength="100" data-displayname="Address" class="ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength form-control empty textColor floating-label2" required="required">
+                        <div class="floating-label textColor floating-label2">Address 2</div>
+                            <!-- ngIf: frmEmployee.address.$error.required --><div class="hint invalid ng-scope floating-label2" ng-if="frmEmployee.address.$error.required">Address is required</div><!-- end ngIf: frmEmployee.address.$error.required -->
+                            <!-- ngIf: frmEmployee.address.$error.minlength || frmEmployee.address.$error.maxlength -->
+                            <span class="material-input"></span>
+                        </div>
+                </div>
+
+
+
+
+                <div class=" ng-scope">
+                    <div class="col-sm-3 colHeight" ng-hide="args.populated_fields.zip!='' &amp;&amp; args.hide_fields">
+                        <div class="form-control-wrapper">
+                            <input ng-class="{'form-control empty':args.populated_fields.zip=='', 'form-control':true}" type="text" data-hint="zip code" ng-maxlength="6" ng-minlength="6" ng-model="tcid.employee.maindata.zip" name="zip" id="zip" ng-required="true" data-displayname="Zip" ng-change="getZips();" class="ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength form-control empty floating-label2" required="required">
+                            <div class="floating-label floating-label2">Zip</div>
+                            <!-- ngIf: frmEmployee.zip.$error.required --><div class="hint invalid ng-scope floating-label2" ng-if="frmEmployee.zip.$error.required">Zip Code is required</div><!-- end ngIf: frmEmployee.zip.$error.required -->
+                            <!-- ngIf: frmEmployee.zip.$error.minlength || frmEmployee.zip.$error.maxlength -->
+                            <span class="material-input"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 ng-hide colHeight" ng-hide="!tcid.empcityother || args.populated_fields.city!='' &amp;&amp; args.hide_fields">
+                        <div class="form-control-wrapper">
+                            <input ng-class="{'form-control empty':args.populated_fields.city=='', 'form-control':true}" type="text" data-hint="Enter Your City" ng-model="tcid.employee.maindata.city" name="city" ng-required="true" ng-minlength="2" ng-maxlength="50" data-displayname="City" class="ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength form-control empty floating-label2" required="required">
+                            <div class="floating-label floating-label2">City</div>
+                            <!-- ngIf: frmEmployee.city.$error.required --><div class="hint invalid ng-scope floating-label2" ng-if="frmEmployee.city.$error.required">City is a required</div><!-- end ngIf: frmEmployee.city.$error.required -->
+                            <span class="material-input"></span>
+                        </div>
+                    </div>
+
+                   <div class="col-sm-4 colHeight" ng-hide="tcid.empcityother || args.populated_fields.city != '' &amp;&amp; args.hide_fields">
+                        <div class="form-control-wrapper">
+                            <select class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required" ng-model="tcid.employee.maindata.city" ng-required="true" data-displayname="City" data-hint="Enter Your City" name="city" ng-change="tcid.empcityothered()" required="required"><option value="? string: ?"></option>
+                            <!-- ngRepeat: cty in tcid.cities[tcid.employee.maindata.zip] -->
+                            </select>
+                            <div class="floating-label floating-label2">City</div>
+                            <!-- ngIf: frmEmployee.city.$error.required --><div class="hint invalid ng-scope floating-label2" ng-if="frmEmployee.city.$error.required">City is required</div><!-- end ngIf: frmEmployee.city.$error.required -->
+                            <span class="material-input"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-5 colHeight" ng-hide="getStateMatch(args.populated_fields.state)>0 &amp;&amp; args.populated_fields.state!='' &amp;&amp; args.hide_fields">
+                        <div class="form-control-wrapper">
+                            <select class="form-control ng-pristine ng-untouched ng-valid ng-valid-required empty floating-label2" ng-class="{'form-control empty':args.populated_fields.state=='' || getStateMatch(args.populated_fields.state)==0, 'form-control':true}" ng-model="tcid.employee.maindata.stateid" id="stateid" name="stateid" ng-required="true" data-displayname="State" required="required"><option value="? number:0 ?"></option>
+                            <option value="">Select State</option><option value="1">ALASKA</option><option value="2">ALABAMA</option><option value="3">ARKANSAS</option><option value="4">ARIZONA</option><option value="5">CALIFORNIA</option><option value="6">COLORADO</option><option value="7">CONNECTICUT</option><option value="8">DISTRICT OF COLUMBIA</option><option value="9">DELAWARE</option><option value="10">FLORIDA</option><option value="11">GEORGIA</option><option value="12">GUAM</option><option value="13">HAWAII</option><option value="14">IOWA</option><option value="15">IDAHO</option><option value="16">ILLINOIS</option><option value="17">INDIANA</option><option value="18">KANSAS</option><option value="19">KENTUCKY</option><option value="20">LOUISIANA</option><option value="21">MASSACHUSETTS</option><option value="22">MARYLAND</option><option value="23">MAINE</option><option value="24">MICHIGAN</option><option value="25">MINNESOTA</option><option value="26">MISSOURI</option><option value="27">MISSISSIPPI</option><option value="28">MONTANA</option><option value="29">NORTH CAROLINA</option><option value="30">NORTH DAKOTA</option><option value="31">NEBRASKA</option><option value="32">NEW HAMPSHIRE</option><option value="33">NEW JERSEY</option><option value="34">NEW MEXICO</option><option value="35">NEVADA</option><option value="36">NEW YORK</option><option value="37">OHIO</option><option value="38">OKLAHOMA</option><option value="39">OREGON</option><option value="40">PENNSYLVANIA</option><option value="41">PUERTO RICO</option><option value="42">PALAU</option><option value="43">RHODE ISLAND</option><option value="44">SOUTH CAROLINA</option><option value="45">SOUTH DAKOTA</option><option value="46">TENNESSEE</option><option value="47">TEXAS</option><option value="48">UTAH</option><option value="49">VIRGINIA</option><option value="50">VERMONT</option><option value="51">WASHINGTON</option><option value="52">WISCONSIN</option><option value="53">WEST VIRGINIA</option><option value="54">WYOMING</option><option value="55">VIRGIN ISLANDS</option>
+                            </select>
+                            <div class="floating-label floating-label2">State</div>
+                            <!-- ngIf: frmEmployee.state.$error.required -->
+                            <span class="material-input"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class=" ng-scope">
+
+                    <div class="col-sm-8 colHeight" ng-hide="args.populated_fields.address!='' &amp;&amp; args.hide_fields">
+                        <div class="form-control-wrapper">
+                        <input  name="email-address" ng-required="true" ng-minlength="5" ng-maxlength="100" data-displayname="Address" class="ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength form-control empty floating-label2" required="required">
+                        <div class="floating-label floating-label2">Email adress</div>
+                            <!-- ngIf: frmEmployee.address.$error.required --><div class="hint invalid ng-scope floating-label2" ng-if="frmEmployee.address.$error.required">Address is required</div><!-- end ngIf: frmEmployee.address.$error.required -->
+                            <!-- ngIf: frmEmployee.address.$error.minlength || frmEmployee.address.$error.maxlength -->
+                            <span class="material-input"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 colHeight" ng-hide="isValidDate(args.populated_fields.dob) &amp;&amp; args.hide_fields">
+                        <div class="form-control-wrapper">
+                            <div class="input-group">
+                            <input type="tel" class="form-control ng-pristine ng-untouched ng-isolate-scope ng-valid-date ng-invalid ng-invalid-required floating-label2" datepicker-popup="MM/dd/yyyy" placeholder="mm/dd/yyyy" ng-model="tcid.employee.maindata.dob" is-open="cals['dob']" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" data-displayname="Date of Birth" name="dob" required="required"><ul id="ulDate" class="dropdown-menu ng-valid ng-valid-date-disabled" ng-style="{display: (isOpen &amp;&amp; 'block') || 'none', top: position.top+'px', left: position.left+'px'}" ng-keydown="keydown($event)" datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection()" style="display: none;">
+                            <li ng-transclude=""><div ng-switch="datepickerMode" role="application" ng-keydown="keydown($event)" datepicker="" min-date="watchData.minDate" class="ng-isolate-scope">
+                            <table role="grid" aria-labelledby="datepicker-30-7693-title" aria-activedescendant="datepicker-30-7693-8" ng-switch-when="day" tabindex="0">
+                            <thead>
+                            <tr>
+                              <th><button type="button" class="btn btn-default btn-sm pull-left" ng-click="move(-1)" tabindex="-1"><i class="glyphicon glyphicon-chevron-left"></i></button></th>
+                              <th colspan="6"><button id="datepicker-30-7693-title" role="heading" aria-live="assertive" aria-atomic="true" type="button" class="btn btn-default btn-sm" ng-click="toggleMode()" tabindex="-1" style="width:100%;"><strong class="ng-binding">September 2015</strong></button></th>
+                              <th><button type="button" class="btn btn-default btn-sm pull-right" ng-click="move(1)" tabindex="-1"><i class="glyphicon glyphicon-chevron-right"></i></button></th>
+                            </tr>
+                            <tr>
+                              <th ng-show="showWeeks" class="text-center"></th>
+                              <!-- ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Sunday" class="ng-binding">Sun</small></th><!-- end ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Monday" class="ng-binding">Mon</small></th><!-- end ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Tuesday" class="ng-binding">Tue</small></th><!-- end ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Wednesday" class="ng-binding">Wed</small></th><!-- end ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Thursday" class="ng-binding">Thu</small></th><!-- end ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Friday" class="ng-binding">Fri</small></th><!-- end ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Saturday" class="ng-binding">Sat</small></th><!-- end ngRepeat: label in labels track by $index -->
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <!-- ngRepeat: row in rows track by $index --><tr ng-repeat="row in rows track by $index" class="ng-scope">
+                              <td ng-show="showWeeks" class="text-center h6"><em class="ng-binding">35</em></td>
+                              <!-- ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-0" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">30</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-1" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">31</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-2" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">01</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-3" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">02</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-4" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">03</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-5" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">04</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-6" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">05</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date -->
+                            </tr><!-- end ngRepeat: row in rows track by $index --><tr ng-repeat="row in rows track by $index" class="ng-scope">
+                              <td ng-show="showWeeks" class="text-center h6"><em class="ng-binding">36</em></td>
+                              <!-- ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-7" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">06</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-8" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm active" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-info">07</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-9" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">08</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-10" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">09</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-11" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">10</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-12" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">11</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-13" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">12</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date -->
+                            </tr><!-- end ngRepeat: row in rows track by $index --><tr ng-repeat="row in rows track by $index" class="ng-scope">
+                              <td ng-show="showWeeks" class="text-center h6"><em class="ng-binding">37</em></td>
+                              <!-- ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-14" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">13</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-15" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">14</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-16" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">15</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-17" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">16</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-18" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">17</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-19" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">18</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-20" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">19</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date -->
+                            </tr><!-- end ngRepeat: row in rows track by $index --><tr ng-repeat="row in rows track by $index" class="ng-scope">
+                              <td ng-show="showWeeks" class="text-center h6"><em class="ng-binding">38</em></td>
+                              <!-- ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-21" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">20</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-22" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">21</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-23" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">22</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-24" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">23</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-25" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">24</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-26" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">25</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-27" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">26</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date -->
+                            </tr><!-- end ngRepeat: row in rows track by $index --><tr ng-repeat="row in rows track by $index" class="ng-scope">
+                              <td ng-show="showWeeks" class="text-center h6"><em class="ng-binding">39</em></td>
+                              <!-- ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-28" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">27</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-29" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">28</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-30" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">29</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-31" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">30</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-32" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">01</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-33" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">02</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-34" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">03</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date -->
+                            </tr><!-- end ngRepeat: row in rows track by $index --><tr ng-repeat="row in rows track by $index" class="ng-scope">
+                              <td ng-show="showWeeks" class="text-center h6"><em class="ng-binding">40</em></td>
+                              <!-- ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-35" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">04</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-36" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">05</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-37" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">06</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-38" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">07</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-39" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">08</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-40" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">09</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-7693-41" aria-disabled="false">
+                                <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">10</span></button>
+                              </td><!-- end ngRepeat: dt in row track by dt.date -->
+                            </tr><!-- end ngRepeat: row in rows track by $index -->
+                          </tbody>
+                        </table><!-- end ngSwitchWhen: -->
+                          <!-- ngSwitchWhen: month -->
+                          <!-- ngSwitchWhen: year -->
+                        </div></li>
+                        <li ng-if="showButtonBar" style="padding:10px 9px 2px" class="ng-scope">
+                        <span class="btn-group pull-left">
+                            <button type="button" class="btn btn-sm btn-info ng-binding" ng-click="select('today')">Today</button>
+                            <button type="button" class="btn btn-sm btn-danger ng-binding" ng-click="select(null)">Clear</button>
+                        </span>
+                        <button type="button" class="btn btn-sm btn-success pull-right ng-binding" ng-click="close()">Close</button>
+                        </li>
+                    </ul>
+                    <div class="floating-label floating-label2">Date of Birth</div>
+                    <!-- ngIf: frmEmployee.dob.$error.required --><div class="hint invalid ng-scope floating-label2" ng-if="frmEmployee.dob.$error.required">Date of Birth is required</div><!-- end ngIf: frmEmployee.dob.$error.required -->
+                    <span class="material-input"></span>
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-sm btn-default calBtn" ng-click="calop($event,'dob')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ng-scope">
+                    <div class="col-sm-12 colHeight">
+                        <div class="col-sm-9">
+                            <lable class="control-label pull-left floating-label2" for="rehire">Have you ever worked for this company before??</lable>
+                        </div>
+                        <div id="rehire" class="col-sm-3 input-group pull-left">
+                            <div class="btn-group">
+                                <label class="btn btn-sm btn-warning ng-pristine ng-untouched ng-valid active rehire-btn btn-hover1 btnNo" ng-model="tcid.employee.maindata.rehire" btn-radio="0">NO</label>
+                                <label class="btn btn-sm btn-success ng-pristine ng-untouched ng-valid ng-valid-required rehire-btn btn-hover2 btnYes" ng-model="tcid.employee.maindata.rehire" btn-radio="1" ng-required="true" data-displayname="Rehire" name="rehire" required="required">YES</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+            </div>
+
+
+        <div class="col-sm-12 question colHeight1" heading="Questionnaire">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a href="" class="accordion-toggle floating-label2" accordion-transclude="heading"><span ng-class="{'text-muted': isDisabled}" class="ng-binding">Questionnaire</span></a>
+                </h4>
+            </div>
+        </div>
+
+
+
+        <center class="colHeight1">
+            <button class="btnSaveMaterial" type="submit" class="btn btn-info" ng-disabled="isDisabled">SUBMIT</button>
+        </center>
+
+
+ </div>
+</div>
+
+
+    <!-- modal-preview-bootstrap -->
+    <div class="wrap-modal1">
+
+        <div id="modal-preview-bootstrap" class="mod">
+            <div class="col-sm-12 modal-head2 head-color">
+                <img class="img img-thumbnail img-responsive logo ng-scope" ng-src="/widget/iframe/images/retrotax_plugin_logo.png" src="/widget/iframe/images/retrotax_plugin_logo.png">
+                <span class="span-close1 text-right floating-label2">Close</span>
+            </div>
+            <div ng-controller="ctlEmployee" ng-init="initEdit()" class="ng-scope">
+
+                <form name="frmEmployee" id="frmEmployee" class="form-horizontal ng-pristine ng-valid-date ng-invalid ng-invalid-required ng-valid-maxlength ng-valid-minlength ng-valid-date-disabled ng-valid-email" role="form" ng-submit="save(frmEmployee.$valid)" novalidate="">
+                    <div class="panel panel-default ng-isolate-scope" is-open="1" ng-show="currentemployeeid==0">
+
+                        <div class="panel-heading">
+                            <h4 class="panel-title floating-label2" style="color: rgb(0, 0, 0);">
+                                <a href="" class="accordion-toggle" ng-click="toggleOpen()" accordion-transclude="heading">
+                                    <sapn class="floating-label2 ng-scope" style="color: rgb(0, 0, 0);">Basic Info:</sapn><span class="ng-binding ng-scope">     </span><i ng-class="{'pull-right glyphicon glyphicon-exclamation-sign':icon.BasicInfo}" class="ng-scope"></i>
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div class="panel-collapse collapse in" collapse="!isOpen" style="height: auto;">
+                            <div class="panel-body">
+                                <table class="table table-user-information table-responsive ng-scope">
+                                    <tbody>
+
+                                        <tr class="req" ng-hide="args.populated_fields.firstname!='' &amp;&amp; args.hide_fields">
+                                            <th class="frmlbl floating-label2" style="color: rgb(0, 0, 0);">First Name</th>
+                                            <td class="frminput">
+                                                <input class="input-sm floating-label2 ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength" type="text" placeholder="enter first name" ng-model="tcid.employee.maindata.firstname" name="firstname" id="firstname" ng-required="true" data-displayname="First Name" xxng-minlength="2" ng-maxlength="50" required="required" style="color: rgb(0, 0, 0);">
+                                            </td>
+                                        </tr>
+                                        <tr class="req" ng-hide="args.populated_fields.lastname!='' &amp;&amp; args.hide_fields">
+                                            <th class="frmlbl floating-label2" style="color: rgb(0, 0, 0);">Last Name</th>
+                                            <td class="frminput">
+                                                <input class="input-sm floating-label2 ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength" type="text" placeholder="enter last name" ng-model="tcid.employee.maindata.lastname" name="lastname" id="lastname" ng-required="true" data-displayname="Last Name" ng-minlength="2" ng-maxlength="50" required="required" style="color: rgb(0, 0, 0);"></td>
+                                        </tr>
+                                        <tr class="req" ng-hide="args.populated_fields.address!='' &amp;&amp; args.hide_fields">
+                                            <th class="frmlbl floating-label2" style="color: rgb(0, 0, 0);">Address</th>
+                                            <td class="frminput">
+                                                <input class="input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength floating-label2" type="text" placeholder="enter employee home address" ng-model="tcid.employee.maindata.address" name="address" ng-required="true" ng-minlength="5" ng-maxlength="100" data-displayname="Address" required="required"></td>
+                                        </tr>
+                                        <tr ng-hide="args.populated_fields.address!='' || args.populated_fields.address2!='' &amp;&amp; args.hide_fields" class="">
+                                            <th class="frmlbl"></th>
+                                            <td class="frminput">
+                                                <input class="input-sm floating-label2 ng-pristine ng-untouched ng-valid" type="text" placeholder="optional address line" ng-model="tcid.employee.maindata.address2" name="address2" style="color: rgb(0, 0, 0);"></td>
+                                        </tr>
+                                        <tr class="req">
+                                            <th class="frmlbl floating-label2" style="color: rgb(0, 0, 0);">Zip</th>
+                                            <td class="frminput"><input class="input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength floating-label2" type="text" placeholder="zip code" ng-model="tcid.employee.maindata.zip" name="zip" id="zip" ng-required="true" mask="99999" data-displayname="Zip" ng-change="getZips();" ng-minlength="12" ng-maxlength="12" required="required"></td>
+                                        </tr>
+                                        <tr class="req" ng-show="!tcid.empcityother">
+                                            <th class="frmlbl floating-label2" style="color: rgb(0, 0, 0);">City</th>
+                                            <td class="frminput">
+                                                <select class="input-sm floating-label2 ng-pristine ng-untouched ng-invalid ng-invalid-required" ng-model="tcid.employee.maindata.city" ng-required="true" data-displayname="City" name="city" ng-change="tcid.empcityothered()" required="required" style="color: rgb(0, 0, 0);"><option value="? string: ?"></option>
+                                                    <!-- ngRepeat: cty in tcid.cities[tcid.employee.maindata.zip] -->
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr class="req" ng-hide="tcid.employee.maindata.stateid > 0 &amp;&amp; args.hide_fields">
+                                            <th class="frmlbl floating-label2" style="color: rgb(0, 0, 0);">State</th>
+                                            <td class="frminput">
+                                                <select class="input-sm floating-label2 ng-pristine ng-untouched ng-valid ng-valid-required" ng-model="tcid.employee.maindata.stateid" id="stateid" name="stateid" ng-required="true" data-displayname="State" required="required" style="color: rgb(0, 0, 0);"><option value="? number:0 ?"></option>
+                                                    <option value="">Select State</option><option value="1">ALASKA</option><option value="2">ALABAMA</option><option value="3">ARKANSAS</option><option value="4">ARIZONA</option><option value="5">CALIFORNIA</option><option value="6">COLORADO</option><option value="7">CONNECTICUT</option><option value="8">DISTRICT OF COLUMBIA</option><option value="9">DELAWARE</option><option value="10">FLORIDA</option><option value="11">GEORGIA</option><option value="12">GUAM</option><option value="13">HAWAII</option><option value="14">IOWA</option><option value="15">IDAHO</option><option value="16">ILLINOIS</option><option value="17">INDIANA</option><option value="18">KANSAS</option><option value="19">KENTUCKY</option><option value="20">LOUISIANA</option><option value="21">MASSACHUSETTS</option><option value="22">MARYLAND</option><option value="23">MAINE</option><option value="24">MICHIGAN</option><option value="25">MINNESOTA</option><option value="26">MISSOURI</option><option value="27">MISSISSIPPI</option><option value="28">MONTANA</option><option value="29">NORTH CAROLINA</option><option value="30">NORTH DAKOTA</option><option value="31">NEBRASKA</option><option value="32">NEW HAMPSHIRE</option><option value="33">NEW JERSEY</option><option value="34">NEW MEXICO</option><option value="35">NEVADA</option><option value="36">NEW YORK</option><option value="37">OHIO</option><option value="38">OKLAHOMA</option><option value="39">OREGON</option><option value="40">PENNSYLVANIA</option><option value="41">PUERTO RICO</option><option value="42">PALAU</option><option value="43">RHODE ISLAND</option><option value="44">SOUTH CAROLINA</option><option value="45">SOUTH DAKOTA</option><option value="46">TENNESSEE</option><option value="47">TEXAS</option><option value="48">UTAH</option><option value="49">VIRGINIA</option><option value="50">VERMONT</option><option value="51">WASHINGTON</option><option value="52">WISCONSIN</option><option value="53">WEST VIRGINIA</option><option value="54">WYOMING</option><option value="55">VIRGIN ISLANDS</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr class="req ng-scope" ng-if="isPrequal">
+                                            <th class="frmlbl floating-label2">Email Address</th>
+                                            <td class="frminput">
+                                                <input class="input-sm ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required floating-label2" type="email" placeholder="Email Address" ng-model="tcid.employee.maindata.email" name="email" id="email" ng-required="isPrequal" data-displayname="Email Address" required="required">
+                                            </td>
+                                        </tr>
+                                        <tr class="req contdob" ng-hide="isValidDate(args.populated_fields.dob) &amp;&amp; args.hide_fields">
+                                            <th class="frmlbl floating-label2" style="color: rgb(0, 0, 0);">DOB</th>
+                                            <td class="input-group frminput">
+                                                <p class="input-group">
+                                                    <input type="text" datepicker-popup="MM/dd/yyyy" class="form-control input-sm ng-pristine ng-untouched ng-isolate-scope ng-valid-date ng-invalid ng-invalid-required floating-label2" ng-model="tcid.employee.maindata.dob" is-open="cals['dob']" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" data-displayname="Date of Birth" style="width:100px" name="dob" required="required"><ul class="dropdown-menu ng-valid ng-valid-date-disabled" ng-style="{display: (isOpen &amp;&amp; 'block') || 'none', top: position.top+'px', left: position.left+'px'}" ng-keydown="keydown($event)" datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection()" style="display: none;">
+                                                <li ng-transclude=""><div ng-switch="datepickerMode" role="application" ng-keydown="keydown($event)" datepicker="" min-date="watchData.minDate" class="ng-isolate-scope">
+                                                    <!-- ngSwitchWhen: day --><table role="grid" aria-labelledby="datepicker-30-551-title" aria-activedescendant="datepicker-30-551-11" ng-switch-when="day" tabindex="0">
+                                                    <thead>
+                                                    <tr>
+                                                        <th><button type="button" class="btn btn-default btn-sm pull-left" ng-click="move(-1)" tabindex="-1"><i class="glyphicon glyphicon-chevron-left"></i></button></th>
+                                                        <th colspan="6"><button id="datepicker-30-551-title" role="heading" aria-live="assertive" aria-atomic="true" type="button" class="btn btn-default btn-sm" ng-click="toggleMode()" tabindex="-1" style="width:100%;"><strong class="ng-binding">September 2015</strong></button></th>
+                                                        <th><button type="button" class="btn btn-default btn-sm pull-right" ng-click="move(1)" tabindex="-1"><i class="glyphicon glyphicon-chevron-right"></i></button></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th ng-show="showWeeks" class="text-center"></th>
+                                                        <!-- ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Sunday" class="ng-binding">Sun</small></th><!-- end ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Monday" class="ng-binding">Mon</small></th><!-- end ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Tuesday" class="ng-binding">Tue</small></th><!-- end ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Wednesday" class="ng-binding">Wed</small></th><!-- end ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Thursday" class="ng-binding">Thu</small></th><!-- end ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Friday" class="ng-binding">Fri</small></th><!-- end ngRepeat: label in labels track by $index --><th ng-repeat="label in labels track by $index" class="text-center ng-scope"><small aria-label="Saturday" class="ng-binding">Sat</small></th><!-- end ngRepeat: label in labels track by $index -->
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <!-- ngRepeat: row in rows track by $index --><tr ng-repeat="row in rows track by $index" class="ng-scope">
+                                                        <td ng-show="showWeeks" class="text-center h6"><em class="ng-binding">35</em></td>
+                                                        <!-- ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-0" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">30</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-1" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">31</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-2" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">01</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-3" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">02</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-4" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">03</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-5" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">04</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-6" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">05</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date -->
+                                                    </tr><!-- end ngRepeat: row in rows track by $index --><tr ng-repeat="row in rows track by $index" class="ng-scope">
+                                                        <td ng-show="showWeeks" class="text-center h6"><em class="ng-binding">36</em></td>
+                                                        <!-- ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-7" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">06</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-8" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">07</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-9" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">08</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-10" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">09</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-11" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm active" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-info">10</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-12" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">11</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-13" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">12</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date -->
+                                                    </tr><!-- end ngRepeat: row in rows track by $index --><tr ng-repeat="row in rows track by $index" class="ng-scope">
+                                                        <td ng-show="showWeeks" class="text-center h6"><em class="ng-binding">37</em></td>
+                                                        <!-- ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-14" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">13</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-15" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">14</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-16" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">15</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-17" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">16</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-18" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">17</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-19" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">18</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-20" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">19</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date -->
+                                                    </tr><!-- end ngRepeat: row in rows track by $index --><tr ng-repeat="row in rows track by $index" class="ng-scope">
+                                                        <td ng-show="showWeeks" class="text-center h6"><em class="ng-binding">38</em></td>
+                                                        <!-- ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-21" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">20</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-22" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">21</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-23" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">22</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-24" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">23</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-25" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">24</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-26" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">25</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-27" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">26</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date -->
+                                                    </tr><!-- end ngRepeat: row in rows track by $index --><tr ng-repeat="row in rows track by $index" class="ng-scope">
+                                                        <td ng-show="showWeeks" class="text-center h6"><em class="ng-binding">39</em></td>
+                                                        <!-- ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-28" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">27</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-29" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">28</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-30" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">29</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-31" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding">30</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-32" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">01</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-33" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">02</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-34" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">03</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date -->
+                                                    </tr><!-- end ngRepeat: row in rows track by $index --><tr ng-repeat="row in rows track by $index" class="ng-scope">
+                                                        <td ng-show="showWeeks" class="text-center h6"><em class="ng-binding">40</em></td>
+                                                        <!-- ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-35" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">04</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-36" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">05</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-37" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">06</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-38" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">07</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-39" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">08</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-40" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">09</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date --><td ng-repeat="dt in row track by dt.date" class="text-center ng-scope" role="gridcell" id="datepicker-30-551-41" aria-disabled="false">
+                                                        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{'btn-info': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{'text-muted': dt.secondary, 'text-info': dt.current}" class="ng-binding text-muted">10</span></button>
+                                                    </td><!-- end ngRepeat: dt in row track by dt.date -->
+                                                    </tr><!-- end ngRepeat: row in rows track by $index -->
+                                                    </tbody>
+                                                </table><!-- end ngSwitchWhen: -->
+                                                    <!-- ngSwitchWhen: month -->
+                                                    <!-- ngSwitchWhen: year -->
+                                                </div></li>
+                                                <!-- ngIf: showButtonBar --><li ng-if="showButtonBar" style="padding:10px 9px 2px" class="ng-scope">
+		<span class="btn-group pull-left">
+			<button type="button" class="btn btn-sm btn-info ng-binding" ng-click="select('today')">Today</button>
+			<button type="button" class="btn btn-sm btn-danger ng-binding" ng-click="select(null)">Clear</button>
+		</span>
+                                                <button type="button" class="btn btn-sm btn-success pull-right ng-binding" ng-click="close()">Close</button>
+                                            </li><!-- end ngIf: showButtonBar -->
+                                            </ul>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default calBtn" ng-click="calop($event,'dob')"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+                                                </p>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+
+                                <table class="table table-user-information table-responsive ng-scope">
+                                    <tbody>
+                                    <tr class="yesno req">
+                                        <th width="*" align="right" valign="top" class="floating-label2 someText" style="color: rgb(0, 0, 0);">
+                                            Have you ever worked for this company before?
+                                        </th>
+                                        <td class="" width="100" align="right" valign="top">
+                                            <div class="btn-group">
+                                                <label class="btn btn-sm btn-success ng-pristine ng-untouched ng-valid ng-valid-required btnYes" ng-model="tcid.employee.maindata.rehire" btn-radio="1" ng-required="true" data-displayname="Rehire" name="rehire" required="required">YES</label>
+                                                <label class="btn btn-sm btn-warning ng-pristine ng-untouched ng-valid active btnNo" ng-model="tcid.employee.maindata.rehire" btn-radio="0">NO</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="clear-20 ng-scope"></div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="panel panel-default ng-isolate-scope" heading="Questionnaire" ng-show="tcid.employee.maindata.rehire==0 &amp;&amp; currentemployeeid==0">
+                        <div class="panel-heading">
+                            <h4 class="panel-title floating-label2" style="color: rgb(0, 0, 0);">
+                                <a class="accordion-toggle" accordion-transclude="heading"><span ng-class="{'text-muted': isDisabled}" class="ng-binding">Questionnaire</span></a>
+                            </h4>
+                        </div>
+                    </div>
+
+
+                    <button ng-show="currentemployeeid==0" type="submit" class="btn btn-primary btn-block" id="btnSave" ng-disabled="isDisabled">Submit&nbsp;&nbsp;&nbsp;<i ng-class="{'glyphicon glyphicon-ok':!isUploading, 'glyphicon glyphicon-refresh glyphicon-spin':isUploading}" class="glyphicon glyphicon-ok"></i></button>
+                </form>
+            </div><!-- /modal -->
+        </div>
+    </div>
+</body>
+
+</html>
