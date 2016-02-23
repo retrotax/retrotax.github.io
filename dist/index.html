@@ -20,6 +20,20 @@
     <link href="demo/bower_components/json-formatter/dist/json-formatter.min.css" rel="stylesheet">
 
                 <style>
+                  .custom-radio-button-label {
+                    top: -10px;
+                    font-size: 10px;
+                    opacity: 1;
+                    color: #7e7e7e;
+                    margin-bottom:20px;
+                  }
+
+                  .custom-radio-button{
+                    top:-10px;
+                    position: relative;
+                    margin-bottom:15px;
+                  }
+
                   #input h2 {
                     padding: 14px;
                     font-size: 16px;
@@ -61,21 +75,29 @@
     <script src="widget/iframe/js/jscolor.js"></script>
     <script>
         $.material.init();
-        var hname='/dist/widget/iframe';
+        <!-- build:widgetPath -->
+         var hname='/widget/iframe';
+        <!-- endbuild -->
         var _retrotax_options={
             iframe_base_path: hname,
-            plugin_type: 'prequal',
-            username:'demoapi.hiring.manager',
-            apikey:'B47400F36FB8BA0C247798C94D153703',
-            clientid:364,
-            companyid:1054,
-            locationid:8557,
+            plugin_type: 'obs',
+            language_setting: 'en',
+            username:'jorge.quintana',  //'demoapi.hiring.manager',
+            apikey:'F9B8476C3984EA8A670BB32C19777C03', //'B47400F36FB8BA0C247798C94D153703',
+            clientid:'',//364,
+            companyid:'',//1054,
+            locationid:'',//8557,
             framework:'material-design',
             delay: 0,
-            debug: true,
-            logo:'',
+            debug: 'true',
+            hide_fields: 'false',
+            logo:'http://www.laborfinders.com/img/mobile/bg/logo.png',
             callback_url:'',
             whitelist_code:'',
+            queue_docs: 'true',
+            hide_hm_section: 'false',
+            hm_name:'Hiring Manager Name',
+            hm_title:'Hiring Manager',
             button_class:'btn btn-primary',
             button_text:'Open Tax Credit Screening Form',
             button_class_error:'btn btn-danger',
@@ -117,6 +139,9 @@
 
     <script src="demo/js/app.js"></script>
     <script src="widget/retrotax_plugin.js"></script>
+    <!--
+        <script src="https://retrotax.github.io/dist/widget/retrotax_plugin.js"></script>
+    -->
     <script src="widget/iframe/js/modal-preview.js"></script>
 
 <script type='text/javascript'>
@@ -136,6 +161,8 @@
  <div class="row">
  <div class="col-sm-6 well page active pageClose">
     <h3>Plugin Configuration</h3>
+    <label class="radio-inline"><input type="radio" name="rt-lang" value="en" ng-model="_retrotax_options.language_setting">English</label>
+    <label class="radio-inline"><input type="radio" name="rt-lang" value="sp" ng-model="_retrotax_options.language_setting">Spanish</label>
     <hr>
     <form name="demoForm" id="demoForm">
         <div class="col-sm-6">
@@ -147,7 +174,7 @@
         </div>
         <div class="col-sm-6">
                 <div class="form-control-wrapper">
-                    <input class="form-control" type="text" data-hint="Your webscreen.retrotax-aci.com client-side api-key, which can be found within TCID under 'Accounts'." name="plugin_type" ng-model="_retrotax_options.plugin_type" value="{{_retrotax_options.plugin_type}}" required>
+                    <input class="form-control" type="text" data-hint="The mode of the plugin: OnBoarding Sys, Applicant Tracking Sys, Prequal, or Demo" name="plugin_type" ng-model="_retrotax_options.plugin_type" value="{{_retrotax_options.plugin_type}}" required>
                     <div class="floating-label">plugin_type</div>
                     <div class="hint">ATS, DEMO, OBS, PREQUAL</div>
                     <span class="material-input"></span>
@@ -163,7 +190,7 @@
         </div>
         <div class="col-sm-6">
                 <div class="form-control-wrapper">
-                    <input class="form-control" type="text" data-hint="TCID Client-side api-key" ng-model="_retrotax_options.apikey" value="{{_retrotax_options.apikey}}" name="apikey" required>
+                    <input class="form-control" type="text" data-hint="Your webscreen.retrotax-aci.com client-side api-key, which can be found within TCID under Accounts." ng-model="_retrotax_options.apikey" value="{{_retrotax_options.apikey}}" name="apikey" required>
                     <div class="floating-label">apikey</div>
                     <div class="hint">TCID Client-side api-key</div>
                     <span class="material-input"></span>
@@ -201,13 +228,55 @@
                     <span class="material-input"></span>
                 </div>
         </div>
-        <div class="col-sm-6">
-                <div class="form-control-wrapper">
-                    <input class="form-control" type="text" name="debug" data-hint="If set to true, we will log to the console" ng-model="_retrotax_options.debug" value="{{_retrotax_options.debug}}">
-                    <div class="floating-label">debug</div>
-                    <div class="hint">If set to true, we will log to the console. Boolean.</div>
+        <div class="col-sm-12" ng-if="_retrotax_options.plugin_type=='obs'">
+                
+                <div >
+                    <div class ="custom-radio-button-label">hide_hm_section</div>
+                    <div class="custom-radio-button">
+                    <label class="radio-inline"><input type="radio" name="hide_hm_section" value="false" ng-model="_retrotax_options.hide_hm_section">False</label>
+                    <label class="radio-inline"><input type="radio" name="hide_hm_section" value="true" ng-model="_retrotax_options.hide_hm_section">True</label>
+                     </div>
                     <span class="material-input"></span>
                 </div>
+        </div>
+        <div class="col-sm-6" ng-if="_retrotax_options.plugin_type=='obs' && _retrotax_options.hide_hm_section == 'false'">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" name="hm_name" data-hint="Hiring Manager Name" value="{{_retrotax_options.hm_name}}">
+                    <div class="floating-label">hm_name</div>
+                    <div class="hint">Hiring Manager Name</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6" ng-if="_retrotax_options.plugin_type=='obs' && _retrotax_options.hide_hm_section == 'false'">
+                <div class="form-control-wrapper">
+                    <input class="form-control" type="text" name="hm_title" data-hint="Hiring Manager Title" value="{{_retrotax_options.hm_title}}">
+                    <div class="floating-label">hm_title</div>
+                    <div class="hint">Hiring Manager Title (Default: Hiring Manager)</div>
+                    <span class="material-input"></span>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                
+                <div class="form-control-wrapper">
+                    <div class="form-control">
+                    <label class="radio-inline"><input type="radio" name="debug" value="false" ng-model="_retrotax_options.debug">False</label>
+                    <label class="radio-inline"><input type="radio" name="debug" value="true" ng-model="_retrotax_options.debug">True</label>
+                    </div>
+                    <div class ="floating-label"><span>debug </span><span ng-if="_retrotax_options.debug == 'false'">(If set to true, we will log to the console.)</span></div>
+                    <div class ="hint" ng-if="_retrotax_options.debug == 'false'">If set to true, we will log to the console. Boolean.</div>
+                    <span class="material-input"></span>
+                </div>
+                <!--
+                <div >
+                    <div class ="custom-radio-button-label">debug</div>
+                    <div class="custom-radio-button">
+                    <label class="radio-inline"><input type="radio" name="debug" value="0" ng-model="_retrotax_options.debug">False</label>
+                    <label class="radio-inline"><input type="radio" name="debug" value="1" ng-model="_retrotax_options.debug">True</label>
+                     </div>
+                     <div class ="hint" ng-if="_retrotax_options.debug == 0">If set to true, we will log to the console. Boolean.</div>
+                    <span class="material-input"></span>
+                </div>
+                -->
         </div>
 
         <div class="col-sm-6">
@@ -224,7 +293,7 @@
                 <div class="form-control-wrapper">
                     <input class="form-control" type="text" name="button_class" data-hint="Optionally apply a css class to the retrotax element" ng-model="_retrotax_options.button_class" value="{{_retrotax_options.button_class}}">
                     <div class="floating-label">button_class</div>
-                    <div class="hint">This depends on your CSS - Demo is using Bootstrap so only those classes will be applied.</div>
+                    <div class="hint">This depends on your CSS - Demo is using Material Design so only those classes will be applied.</div>
                     <span class="material-input"></span>
                 </div>
         </div>
@@ -282,14 +351,56 @@
                     <span class="material-input"></span>
                 </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6" ng-if="_retrotax_options.plugin_type=='obs'">
+                
                 <div class="form-control-wrapper">
-                    <input class="form-control" type="text" name="hide_fields" data-hint="Whether to hide prepopulated fields from the user or display their populated values. Boolean." ng-model="_retrotax_options.hide_fields" value="{{_retrotax_options.hide_fields}}">
-                    <div class="floating-label">hide_fields</div>
-                    <div class="hint">Whether to hide prepopulated fields from the user or display their populated values. Boolean.</div>
+                    
+                    <div class="form-control">
+                    <label class="radio-inline"><input type="radio" name="queue_docs" value="false" ng-model="_retrotax_options.queue_docs">False</label>
+                    <label class="radio-inline"><input type="radio" name="queue_docs" value="true" ng-model="_retrotax_options.queue_docs">True</label>
+                    </div>
+                    <div class ="floating-label"><span>queue_docs </span><span ng-if="_retrotax_options.queue_docs == 'false'">(Whether to queue Document Generation for OBS mode. Defaults to True)</span></div>
+                    <div class ="hint" ng-if="_retrotax_options.queue_docs == 0">Whether to queue Document Generation for OBS mode. Defaults to True. Boolean.</div>
                     <span class="material-input"></span>
                 </div>
+               <!--
+                <div >
+                    <div class ="custom-radio-button-label">queue_docs</div>
+                    <div class="custom-radio-button">
+                    <label class="radio-inline"><input type="radio" name="queue_docs" value="0" ng-model="_retrotax_options.queue_docs">False</label>
+                    <label class="radio-inline"><input type="radio" name="queue_docs" value="1" ng-model="_retrotax_options.queue_docs">True</label>
+                     </div>
+                     <div class ="hint" ng-if="_retrotax_options.queue_docs == 0">Whether to queue Document Generation for OBS mode. Defaults to True. Boolean.</div>
+                    <span class="material-input"></span>
+                </div>
+                -->
         </div>
+        <div class="col-sm-6">
+           
+                <div class="form-control-wrapper">
+                    
+                    <div class="form-control">
+                    <label class="radio-inline"><input type="radio" name="hide_fields" value="false" ng-model="_retrotax_options.hide_fields">False</label>
+                    <label class="radio-inline"><input type="radio" name="hide_fields" value="true" ng-model="_retrotax_options.hide_fields">True</label>
+                    </div>
+                    <div class ="floating-label"><span>hide_fields </span><span ng-if="_retrotax_options.hide_fields == 'true'"> (Whether to hide prepopulated fields from the user or display their populated values)</span></div>
+                    <div class ="hint" ng-if="_retrotax_options.hide_fields == 'true'">Whether to hide prepopulated fields from the user or display their populated values. Boolean.</div>
+                    <span class="material-input"></span>
+                </div>
+                <!--
+                <div >
+                    <div class ="custom-radio-button-label">hide_fields</div>
+                    <div class="custom-radio-button">
+                    <label class="radio-inline"><input type="radio" name="hide_fields" value="0" ng-model="_retrotax_options.hide_fields">False</label>
+                    <label class="radio-inline"><input type="radio" name="hide_fields" value="1" ng-model="_retrotax_options.hide_fields">True</label>
+                     </div>
+                     <div class ="hint" ng-if="_retrotax_options.hide_fields == 1">Whether to hide prepopulated fields from the user or display their populated values. Boolean.</div>
+                    <span class="material-input"></span>
+                </div>
+                -->
+        </div>
+        
+        
         <div class="col-sm-6">
                 <div class="form-control-wrapper">
                     <input class="form-control" type="text" name="prepopulate_by" data-hint="If set to id or name the plugin will auto-populate the values in those fields to match those to our field names." ng-model="_retrotax_options.prepopulate_by" value="{{_retrotax_options.prepopulate_by}}">
@@ -299,6 +410,7 @@
                 </div>
         </div>
         <hr>
+        
          <div class="col-sm-6">
                 <div class="form-control-wrapper">
                     <input class="form-control" type="text" data-hint="" name="populated_fields_firstname" ng-model="_retrotax_options.populated_fields.firstname" value="{{_retrotax_options.populated_fields.firstname}}">
@@ -307,7 +419,8 @@
                     <span class="material-input"></span>
                 </div>
         </div>
-         <div class="col-sm-6">
+
+        <div class="col-sm-6">
                 <div class="form-control-wrapper">
                     <input class="form-control" type="text" data-hint="" name="populated_fields_lastname" ng-model="_retrotax_options.populated_fields.lastname" value="{{_retrotax_options.populated_fields.lastname}}">
                     <div class="floating-label">populated_fields.lastname</div>
@@ -315,7 +428,8 @@
                     <span class="material-input"></span>
                 </div>
         </div>
-         <div class="col-sm-6">
+                
+        <div class="col-sm-6">
                 <div class="form-control-wrapper">
                     <input class="form-control" type="text" data-hint="" name="populated_fields_middleinitial" ng-model="_retrotax_options.populated_fields.middleinitial" value="{{_retrotax_options.populated_fields.middleinitial}}">
                     <div class="floating-label">populated_fields.middleinitial</div>
@@ -323,7 +437,7 @@
                     <span class="material-input"></span>
                 </div>
         </div>
-         <div class="col-sm-6">
+        <div class="col-sm-6">
                 <div class="form-control-wrapper">
                     <input class="form-control" type="text" data-hint="" name="populated_fields_address" ng-model="_retrotax_options.populated_fields.address" value="{{_retrotax_options.populated_fields.address}}">
                     <div class="floating-label">populated_fields.address</div>
@@ -351,7 +465,7 @@
                 <div class="form-control-wrapper">
                     <input class="form-control" type="text" name="populated_fields_state" data-hint="" ng-model="_retrotax_options.populated_fields.state" value="{{_retrotax_options.populated_fields.state}}">
                     <div class="floating-label">populated_fields.state</div>
-                    <div class="hint">Integer or 2 Chacter State Abbreviated String.</div>
+                    <div class="hint">Integer or 2 Character State Abbreviated String.</div>
                     <span class="material-input"></span>
                 </div>
         </div>
@@ -485,6 +599,7 @@
 
     <json-formatter json="_retrotax_options" open="0"></json-formatter>
 </div>
+
 </div> <!-- col 6 well -->
 
  <div class="col-sm-6">
@@ -574,7 +689,6 @@
     </center>
 
  </div>
-
 
 
 
@@ -748,7 +862,7 @@
                         <div class="form-control-wrapper">
                             <div class="input-group">
                             <input type="tel" class="form-control ng-pristine ng-untouched ng-isolate-scope ng-valid-date ng-invalid ng-invalid-required floating-label2" datepicker-popup="MM/dd/yyyy" placeholder="mm/dd/yyyy" ng-model="tcid.employee.maindata.dob" is-open="cals['dob']" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" data-displayname="Date of Birth" name="dob" required="required"><ul id="ulDate" class="dropdown-menu ng-valid ng-valid-date-disabled" ng-style="{display: (isOpen &amp;&amp; 'block') || 'none', top: position.top+'px', left: position.left+'px'}" ng-keydown="keydown($event)" datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection()" style="display: none;">
-                            <li ng-transclude=""><div ng-switch="datepickerMode" role="application" ng-keydown="keydown($event)" datepicker="" min-date="watchData.minDate" class="ng-isolate-scope">
+                            <li><div ng-switch="datepickerMode" role="application" ng-keydown="keydown($event)" datepicker="" min-date="watchData.minDate" class="ng-isolate-scope">
                             <table role="grid" aria-labelledby="datepicker-30-7693-title" aria-activedescendant="datepicker-30-7693-8" ng-switch-when="day" tabindex="0">
                             <thead>
                             <tr>
@@ -1006,7 +1120,7 @@
                                             <td class="input-group frminput">
                                                 <p class="input-group">
                                                     <input type="text" datepicker-popup="MM/dd/yyyy" class="form-control input-sm ng-pristine ng-untouched ng-isolate-scope ng-valid-date ng-invalid ng-invalid-required floating-label2" ng-model="tcid.employee.maindata.dob" is-open="cals['dob']" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" data-displayname="Date of Birth" style="width:100px" name="dob" required="required"><ul class="dropdown-menu ng-valid ng-valid-date-disabled" ng-style="{display: (isOpen &amp;&amp; 'block') || 'none', top: position.top+'px', left: position.left+'px'}" ng-keydown="keydown($event)" datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection()" style="display: none;">
-                                                <li ng-transclude=""><div ng-switch="datepickerMode" role="application" ng-keydown="keydown($event)" datepicker="" min-date="watchData.minDate" class="ng-isolate-scope">
+                                                <li><div ng-switch="datepickerMode" role="application" ng-keydown="keydown($event)" datepicker="" min-date="watchData.minDate" class="ng-isolate-scope">
                                                     <!-- ngSwitchWhen: day --><table role="grid" aria-labelledby="datepicker-30-551-title" aria-activedescendant="datepicker-30-551-11" ng-switch-when="day" tabindex="0">
                                                     <thead>
                                                     <tr>
