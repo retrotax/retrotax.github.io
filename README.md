@@ -24,7 +24,7 @@ Configuration Demo:
 Installation
 ============
 1. Contact tech@retrotax-aci.com to request an API Key. For security, we will white-list your domain so only requests originating from that domain will be accepted.
-2. Place `<script type="text/javascript" src="retrotax_plugin.js"></script>` either before the end of your `</head>` tag or at the end before your `</body>` tag (better)
+2. Place `<script type="text/javascript" src="https://cdn.retrotax-aci.com/dist/retrotax_plugin.min.js"></script>` either before the end of your `</head>` tag or at the end before your `</body>` tag (better)
 3. Set your configuration values.
 4. Whitelist the hostname of where you will install this script (see details below)
 5. Verify Code
@@ -331,7 +331,7 @@ panel_color | No | 'FFFFFF' | None | String | The HEX color for the modal's pane
 text_color | No | '000000' | None | String | The HEX color for the modal's text
 error_color | No | 'c0392b'| None | String | The HEX color for the modal's error
 inputWidth | No | 50 | see below | Int | The modal's input width
-language_setting | NO |'en' | 'en', 'sp' | String | Plugin provide multi-langulage options
+language_setting | No |'en' | 'en', 'sp' | String | Plugin provide multi-langulage options
 hide_hm_section | No| false | True, False | Boolean | Whether to hide hiring manager fields from the user or display
 readonly_fields | No| false | True, False | Boolean | Whether to prepopulated fields are Editable fields or Readonly fields
 ```javascript
