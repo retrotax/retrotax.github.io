@@ -76,6 +76,9 @@ var _retrotax_options = {
             logo:'http://yoursite.com/path/to/your/logo/pic.png',
             companyid:1054
             locationid:8557,
+            language_setting: 'en',
+            hide_hm_section: 'false',
+            readonly_fields: 'false',
             button_class:"btn btn-huge btn-info",
             button_text:"Open RetroTax Screening Plugin",
             button_class_error:"btn btn-huge btn-danger",
@@ -304,7 +307,7 @@ Configuration
 
 Parameter | Req | Default | Options | Type | Description 
 --- | --- | --- | --- | --- | ---
-iframe_base_path | Yes | https://pcommons.github.io/widget/iframe | widget/iframe | String | The path to the iframe that gets injected over your page. This should not be changed unless you are testing locally. In that case, set it to 'widget/iframe'.
+iframe_base_path | Yes | https://cdn.retrotax-aci.com/dist/widget/iframe | widget/iframe | String | The path to the iframe that gets injected over your page. This should not be changed unless you are testing locally. In that case, set it to 'widget/iframe'.
 username | Yes | false | None | String | Your webscreen.retrotax-aci.com username
 apikey | Yes | false | None | String - 32 Chars | Your webscreen.retrotax-aci.com client-side api-key, which can be found within TCID under 'Accounts'.
 companyid | No | false | None | Int | If provided, the record created will be associated to that company ID. Furthermore, it will filter possible locations by the company ID (assuming multiple locations). If not provided, the user will be presented with a drop-down with a list of company entities. These companies and the drop-down were defined during your RetroTax OnBoarding process.
@@ -328,7 +331,9 @@ panel_color | No | 'FFFFFF' | None | String | The HEX color for the modal's pane
 text_color | No | '000000' | None | String | The HEX color for the modal's text
 error_color | No | 'c0392b'| None | String | The HEX color for the modal's error
 inputWidth | No | 50 | see below | Int | The modal's input width
-
+language_setting | NO |'en' | 'en', 'sp' | String | Plugin provide multi-langulage options
+hide_hm_section | No| false | True, False | Boolean | Whether to hide hiring manager fields from the user or display
+readonly_fields | No| false | True, False | Boolean | Whether to prepopulated fields are Editable fields or Readonly fields
 ```javascript
 
 populated_fields={
