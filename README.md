@@ -6,7 +6,7 @@ Introduction
 ============
 The RetroTax Plugin is configurable, easy-to-use application built for our clients, alliance partners, and partering organizations to screen job seekers, applicants, and new hires for a range of tax credits. The plugin has 3 different modes for use with On-Boarding Systems, Applicant Tracking Systems, and Pre-Qualification Screening.  The plugin takes advantage of RetroTax's API.  See API Documentation at [https://developer.retrotax-aci.com/](https://developer.retrotax-aci.com/)
 
-![Alt text](demo/images/material-design.png "RetroTax Plugin")
+![Alt text](images/material-design.png "RetroTax Plugin")
 
 [Plugin Screenshot](https://drive.google.com/file/d/0B0LfxC9fk-YpLXU4S3Z5TXhfamc/view?usp=sharing)
 
@@ -255,11 +255,11 @@ Ultimately, the value of screening applicants for tax credits is the insight int
 
 1. via API Call - An API call made to view method (/api/v1/api_employees/view) will return the applicants eligibility status with a max_credit value.  This information can then be displayed on your HRIS dashboard.
 
-![Alt text](demo/images/dashboard_sample.png "Sample Dashboard - for ATS and PreQual Modes")
+![Alt text](images/dashboard_sample.png "Sample Dashboard - for ATS and PreQual Modes")
 
 2. via Email - These are scheduled on a daily, weekly, or monthly basis.  
 
-![Alt text](demo/images/ats_report_sample.png "Sample Dashboard - for ATS and PreQual Modes")
+![Alt text](images/ats_report_sample.png "Sample Dashboard - for ATS and PreQual Modes")
 
 ----------------------------------------------------------------------------------------
 
