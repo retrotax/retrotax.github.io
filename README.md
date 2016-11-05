@@ -345,7 +345,11 @@ prequal={
 ```
 ----------------------------------------------------------------------------------------
 
+Language
+============
+The RetroTax Plugin is available in English and Spanish. The modal's language can be selected by the user or defined in the parameters.
 
+![Alt text](images/spanish_modal.png "Spanish Modal")
 
 
 
