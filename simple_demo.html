@@ -14,8 +14,9 @@
         ssn1[0].value=getRandomSSN(9);}
 
 
+
 var _retrotax_options = {
-                iframe_base_path: 'https://cdn-staging.retrotax-aci.com/dist/widget/iframe',  //http://plugin.retrotax-aci.com/widget/iframe',
+                iframe_base_path: 'https://cdn.retrotax-aci.com/dist/widget/iframe',  //http://plugin.retrotax-aci.com/widget/iframe',
                 debug: false,
                 language_setting: 'en',
                 username: 'plugin',
@@ -37,7 +38,7 @@ var _retrotax_options = {
                     zip: "zipcode",
                     address_line_1: "address",
                     address_line_2: "address2",
-                    county: "",
+                    countyid: "",
                     dob: "dateOfBirth",
                     ssn:"ssn",
                     email:"emailAddress"
@@ -66,7 +67,7 @@ var _retrotax_options = {
 </script>
 </head>
 <body onload="setSSNs()">
-<h3>(STAGING)</h3>
+<h3>(Production)</h3>
     <div id="retrotax_plugin"></div>
 
     <h3>Populate By ID Attribute</h3>
@@ -125,6 +126,6 @@ var _retrotax_options = {
         <input type="text" class="form-control" name="emailAddress" value="paul.commons@retrotax-aci.com"><br>        
     </form>
 </body>
-<script type="text/javascript" src="https://cdn-staging.retrotax-aci.com/dist/retrotax_plugin.min.js"></script>
+<script type="text/javascript" src="https://cdn.retrotax-aci.com/dist/retrotax_plugin.min.js"></script>
 </html>
 
