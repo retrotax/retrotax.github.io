@@ -285,6 +285,9 @@ readonly_fields | NO | false | True, False | Boolean | Whether to hide prepopula
 language_setting | No |'en' |'en', 'sp' |String |Plugin provide multi-langulage options
 hide_hm_section |No |false| True, False |Boolean| Whether to hide hiring manager fields from the user or display
 hiring_manager_fields | No | see below | see below | Obj | The pre-configuratable hiring manager parameters required for on-boarding new hires in 'obs' mode
+use_default_position | No | false | True, False | boolean | If set to true, the most frequently provided starting position for that location is used as default
+use_default_wage | No | false | True, False | boolean | If set to true, the most frequently provided wage for that location is used as default
+input_width | No | 50 | see below | Int | The modal's input width
 readonly_fields |No |false  |True, False| Boolean |Whether to prepopulated fields are Editable fields or Readonly fields
 plugin_type | Yes | 'obs' | 'ats','obs','prequal'| String | The plugin's mode: Application Tracking System, OnBoarding System, or PreQual
 button_text | No | 'Open RetroTax Screening Plugin' | Any | String | What the text displayed to the end-user should say
