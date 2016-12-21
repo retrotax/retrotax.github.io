@@ -272,7 +272,7 @@ iframe_base_path | Yes | https://cdn.retrotax-aci.com/widget/iframe | widget/ifr
 username | Yes | false | None | String | Your webscreen.retrotax-aci.com username. Required if authenticating from a static website
 password | Yes | false | None | String | Your plugin account's webscreen.retrotax-aci.com password. Required if authenticating from a static website
 x_api_key | Yes | false | None | String | Your RetroTax API key
-location_id  | Yes | false | None | Int | Similar to CompanyID, providing this will associate the record to this specific location and the location's parent company. 
+location_id  | No | false | None | Int | Optional for client-level plugin. Defining this will associate the record to this specific location and the location's parent company and hide company and location dropdowns. Location-level plugin users do not need to define this as the user account is already associated to a specific location_id 
 callback_url | No | false | None | Valid URL String | Provide a callback URL and we will return a JSON response of each ATS or OBS submission
 auto_login_code | No | false | None | String | The employee-level user account's TCID auto-login id used to redirect incompatible browsers, e.g. IE9 and below
 framework | No | material-design | None | String | Currently we only have one available front-end option. We aim to add other designs that fit your company requirements
