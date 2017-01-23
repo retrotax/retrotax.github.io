@@ -57,6 +57,15 @@ var _retrotax_options = {
                     hm_name:"Hiring Manager Name",
                     hm_title:"Hiring Manager"
                 },
+                onClose: function(result){
+                  if(result && result.success){
+                    //Every went ok, I can close my window
+                    console.log(" employee saved", result);
+                  } else {
+                    //Something went wrong
+                    console.log(" employee is not saved", result);
+                  }
+                },
                 use_default_position: true,
                 use_default_starting_wage: true,
                 button_class:'btn btn-primary',
