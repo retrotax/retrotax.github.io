@@ -4,7 +4,7 @@ Created by RetroTax
 
 Introduction
 ============
-The RetroTax Plugin is configurable, easy-to-use application built for our clients, alliance partners, and partering organizations to screen job seekers, applicants, and new hires for a range of tax credits. The plugin has 3 different modes for use with On-Boarding Systems, Applicant Tracking Systems, and Pre-Qualification Screening.  The plugin takes advantage of RetroTax's API.  See API Documentation at [https://developer.retrotax-aci.com/](https://developer.retrotax-aci.com/)
+The RetroTax Plugin is a configurable, easy-to-use application built for our clients, alliance partners, and partnering organizations to screen job seekers, applicants, and new hires for a range of tax credits. The plugin has 3 different modes for use with On-Boarding Systems, Applicant Tracking Systems, and Pre-Qualification Screening.  The plugin takes advantage of RetroTax's API.  See API Documentation at [https://developer.retrotax-aci.com/](https://developer.retrotax-aci.com/)
 
 ![Alt text](images/material-design.png "RetroTax Plugin")
 
@@ -80,19 +80,32 @@ var _retrotax_options = {
                 ssn:'',
                 email:''
             },
+            foreign_fields_info={
+                foreign_client_id: "ABC-123-XYZ",
+                foreign_employee_id: 122345
+            }
             head_color: 'FFFFFF',
             panel_color: 'FFFFFF',
             text_color: '000000',
             error_color: 'c0392b',
-            input_width: '50'
+            input_width: '50',
+            onClose: function(result){
+                  if(result && result.success){
+                    //Every went ok, I can close my window
+                    console.log(" employee saved", result);
+                  } else {
+                    //Something went wrong
+                    console.log(" employee is not saved", result);
+                  }
+            }
 
 };
 ```
 
 ----------------------------------------------------------------------------------------
-Callback URL (in-development)
+onClose Callback
 ============
-The plugin provides a callback-url in which we will make a POST request with the TCID response after a user has completed and saved an ATS or OBS application.  The callback URL provided must be https; otherwise, the callback url will be ignored.  You can expect to receive a similar JSON structure to this:
+The plugin provides the onClose parameter which serves as a callback function. Upon a successful submission, the plugin will submit a POST request to RetroTax's API. The API will return its response which can be handled by the onClose function. This is how you would handle/store the employee ID we return and application status, for example. See sample API response below:
 
 ```javascript
 {
@@ -272,8 +285,8 @@ iframe_base_path | Yes | https://cdn.retrotax-aci.com/widget/iframe | widget/ifr
 username | Yes | false | None | String | Your webscreen.retrotax-aci.com username. Required if authenticating from a static website
 password | Yes | false | None | String | Your plugin account's webscreen.retrotax-aci.com password. Required if authenticating from a static website
 x_api_key | Yes | false | None | String | Your RetroTax API key
-location_id  | No | false | None | Int | Optional for client-level plugin. Defining this will associate the record to this specific location and the location's parent company and hide company and location dropdowns. Client-level users cannot use use_default_starting_wage or use_default_position params. Location-level plugin users do not need to define this as the user account is already associated to a specific location_id 
-callback_url | No | false | None | Valid URL String | Provide a callback URL and we will return a JSON response of each ATS or OBS submission
+location_id  | Yes | false | None | Int | Similar to CompanyID, providing this will associate the record to this specific location and the location's parent company. 
+onClose | No | false | None | Function | A callback function that will return the JSON response of each ATS or OBS submission
 auto_login_code | No | false | None | String | The employee-level user account's TCID auto-login id used to redirect incompatible browsers, e.g. IE9 and below
 framework | No | material-design | None | String | Currently we only have one available front-end option. We aim to add other designs that fit your company requirements
 delay | No | 0 | None | Int | How long to delay before showing the plugin appears
@@ -285,9 +298,6 @@ readonly_fields | NO | false | True, False | Boolean | Whether to hide prepopula
 language_setting | No |'en' |'en', 'sp' |String |Plugin provide multi-langulage options
 hide_hm_section |No |false| True, False |Boolean| Whether to hide hiring manager fields from the user or display
 hiring_manager_fields | No | see below | see below | Obj | The pre-configuratable hiring manager parameters required for on-boarding new hires in 'obs' mode
-use_default_position | No | false | True, False | boolean | If set to true, the most frequently provided starting position for that location is used as default
-use_default_wage | No | false | True, False | boolean | If set to true, the most frequently provided wage for that location is used as default
-input_width | No | 50 | see below | Int | The modal's input width
 readonly_fields |No |false  |True, False| Boolean |Whether to prepopulated fields are Editable fields or Readonly fields
 plugin_type | Yes | 'obs' | 'ats','obs','prequal'| String | The plugin's mode: Application Tracking System, OnBoarding System, or PreQual
 button_text | No | 'Open RetroTax Screening Plugin' | Any | String | What the text displayed to the end-user should say
@@ -301,6 +311,14 @@ panel_color | No | 'FFFFFF' | None | String | The HEX color for the modal's pane
 text_color | No | '000000' | None | String | The HEX color for the modal's text
 error_color | No | 'c0392b'| None | String | The HEX color for the modal's error
 input_width | No | 50 | see below | Int | The modal's input width
+foreign_fields_info | No | see below | see below | Obj | Your employee/applicant and client IDs that will be stored in RetroTax's system. The foreign_client_id and foreign_employee_id values can be integers or strings
+
+```javascript
+ foreign_fields_info={
+    "foreign_client_id": "foo",
+    "foreign_employee_id": "foo"
+};
+```
 
 ```javascript
  populated_fields={
