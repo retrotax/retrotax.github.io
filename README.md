@@ -80,7 +80,7 @@ var _retrotax_options = {
                 ssn:'',
                 email:''
             },
-            foreign_fields_info={
+            foreign_fields_info: {
                 foreign_client_id: "ABC-123-XYZ",
                 foreign_employee_id: 122345
             }
