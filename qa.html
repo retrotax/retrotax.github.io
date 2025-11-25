@@ -41,20 +41,28 @@ var _retrotax_options = {
                     ssn:"ssn",
                     email:"emailAddress"
                 },
+                default_location: {
+                    city: "Cincinnati",
+                    state: "OH",
+                    zip: "45232",
+                    address_line_1: "509 Dutch Colony Dr",
+                    address_line_2: "",
+                },
                 hide_fields: 'false',
+                send_new_emp_confirmation: true,
                 readonly_fields: 'false',
                 language_setting: 'en',
                 hide_hm_section: true,
                 hiring_manager_fields:{
-                   occupation_id: '',
-                   starting_wage: '',
-                   dgi: '',
-                   dojo: '',
-                   doh: '',
-                   dsw: '',
-                   hm_name:"Hiring Manager Name",
-                   hm_title:"Hiring Manager"
-               },
+                    occupation_id: 17,
+                    starting_wage: '12',
+                    dgi: '2025-11-23',
+                    dojo: '2025-11-23',
+                    doh: '2025-11-24',
+                    dsw: '2025-11-24',
+                    hm_name:"Hiring Manager Name",
+                    hm_title:"Hiring Manager"
+                },
 //                 onClose: function(result){
 //                   if(result && result.success){
 //                     //Every went ok, I can close my window
