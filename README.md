@@ -80,6 +80,28 @@ var _retrotax_options = {
                 ssn:'',
                 email:''
             },
+            default_location: {
+                  city: "Cincinnati",
+                  state: "OH",
+                  zip: "45232",
+                  address_line_1: "509 Dutch Colony Dr",
+                  address_line_2: ""
+            },
+            hide_fields: 'false',
+            email_confirmation: true,
+            readonly_fields: 'false',
+            language_setting: 'en',
+            hide_hm_section: true,
+            hiring_manager_fields:{
+                occupation_id: 17,
+                starting_wage: '12',
+                dgi: '2025-11-23',
+                dojo: '2025-11-23',
+                doh: '2025-11-24',
+                dsw: '2025-11-24',
+                hm_name:"Hiring Manager Name",
+                hm_title:"Hiring Manager"
+            },
             foreign_fields_info: {
                 foreign_client_id: "ABC-123-XYZ",
                 foreign_employee_id: 122345
@@ -293,7 +315,9 @@ delay | No | 0 | None | Int | How long to delay before showing the plugin appear
 debug | No | false | None | Boolean | If set to true, we will log to the console
 prepopulate_by | No | false | 'id','name','string' | String | If set to id or name the plugin will auto-populate the values in those fields to match those to our field names.  
 populated_fields | No | see below | see below | Obj | The object populated by the `prepopulate_by` parameter
+default_location | No | see below | see below | Obj | If no input by user this object populate default location values.  
 hide_fields | NO | false | True, False | Boolean | Whether to hide prepopulated fields from the user or display their populated values. Boolean
+email_confirmation | No | false | True, False | Boolean | If set to true, a confirmation email will be sent to the user after the employee created.
 readonly_fields | NO | false | True, False | Boolean | Whether to hide prepopulated fields from the user or display their populated values. Boolean
 language_setting | No |'en' |'en', 'sp' |String |Plugin provide multi-langulage options
 hide_hm_section |No |false| True, False |Boolean| Whether to hide hiring manager fields from the user or display
@@ -333,6 +357,16 @@ foreign_fields_info | No | see below | see below | Obj | Your employee/applicant
     "state": "foo",
     "ssn": 42,
     "dob": "2016-10-18"
+};
+```
+
+```javascript
+ default_location={
+    "city": "Cincinnati",
+    "state": "OH",
+    "zip": "45232",
+    "address_line_1": "509 Dutch Colony Dr",
+    "address_line_2": ""
 };
 ```
 
